@@ -1,22 +1,22 @@
 /*
  * Copyright (c) 2017-
  *
- * ¸ÃÎÄ¼ş½öÏŞÓÚXXXÓÎÏ·ÑéÅÆ£¬½ûÖ¹ÆäËüÒ»ÇĞÓÃÍ¾¡£
+ * è¯¥æ–‡ä»¶ä»…é™äºä¼—ä¹æ£‹ç‰Œæ¸¸æˆéªŒç‰Œï¼Œç¦æ­¢å…¶å®ƒä¸€åˆ‡ç”¨é€”ã€‚
  *
- * Ê¹ÓÃ·½·¨£º
- * 1£¬BlackJackShuffle() º¯Êı½ÓÊÕËùÓĞÖÖ×Ó£¬Ò»´ÎĞÔÔËËã³ö×îÖÕÏ´ÅÆ½á¹û¡£
- * 2£¬¹¤¾ßº¯Êı£¬·½±ãÖğ²½ÑéÖ¤£º
- *		GenClientSeedForShow() ½«Ï´ÅÆÖÖ×Ó½øĞĞmd5¼ÓÃÜ£¬ÓëÓÎÏ·ÖĞÁÄÌì´°¿ÚÏà¹ØÏÔÊ¾±È¶Ô¡£
- *		GenFinallySeed() Ê¹ÓÃÖÖ×ÓÁĞ±íÉú³É×îÖÕÏ´ÅÆÖÖ×Ó¡£
- *		GenRandomListBySeed()	¸ù¾İÏ´ÅÆÖÖ×ÓÉú³ÉËæ»úÊıĞòÁĞ¡£
- *		Shuffle() ½»»»Ï´ÅÆËã·¨µÃ³ö×îÖÕÆË¿ËÅÆĞòÁĞ¡£
+ * ä½¿ç”¨æ–¹æ³•ï¼š
+ * 1ï¼ŒBlackJackShuffle() å‡½æ•°æ¥æ”¶æ‰€æœ‰ç§å­ï¼Œä¸€æ¬¡æ€§è¿ç®—å‡ºæœ€ç»ˆæ´—ç‰Œç»“æœã€‚
+ * 2ï¼Œå·¥å…·å‡½æ•°ï¼Œæ–¹ä¾¿é€æ­¥éªŒè¯ï¼š
+ *		GenClientSeedForShow() å°†æ´—ç‰Œç§å­è¿›è¡Œmd5åŠ å¯†ï¼Œä¸æ¸¸æˆä¸­èŠå¤©çª—å£ç›¸å…³æ˜¾ç¤ºæ¯”å¯¹ã€‚
+ *		GenFinallySeed() ä½¿ç”¨ç§å­åˆ—è¡¨ç”Ÿæˆæœ€ç»ˆæ´—ç‰Œç§å­ã€‚
+ *		GenRandomListBySeed()	æ ¹æ®æ´—ç‰Œç§å­ç”Ÿæˆéšæœºæ•°åºåˆ—ã€‚
+ *		Shuffle() äº¤æ¢æ´—ç‰Œç®—æ³•å¾—å‡ºæœ€ç»ˆæ‰‘å…‹ç‰Œåºåˆ—ã€‚
  */
 
 #include <string>
 #include <vector>
 #include <random>
 
-static std::string sCardGraph[4] = { "·½Æ¬", "Ã·»¨", "ºìÌÒ", "ºÚÌÒ" };
+static std::string sCardGraph[4] = { "æ–¹ç‰‡", "æ¢…èŠ±", "çº¢æ¡ƒ", "é»‘æ¡ƒ" };
 static std::string sCardNumStr[14] = { "", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" };
 
 int GetPokerValue(int n, int maxvalue)
@@ -32,13 +32,13 @@ int GetPokerType(int n, int maxvalue)
 
 #include "Crypto.h"
 
-// Éú³É¼ÓÃÜµÄ¿Í»§Ìá¹©ÖÖ×Ó£¬ÓÃÓÚ¿Í»§¶ËÏÔÊ¾
+// ç”ŸæˆåŠ å¯†çš„å®¢æˆ·æä¾›ç§å­ï¼Œç”¨äºå®¢æˆ·ç«¯æ˜¾ç¤º
 std::string GenClientSeedForShow(std::string clientSeed)
 {
 	return BotanCrypto::md5(clientSeed);
 }
 
-// Ê¹ÓÃ¿Í»§Ìá¹©µÄÖÖ×Ó¼°Çø¿éÁ´·µ»ØËæ»úÖÖ×Ó£¬È«¾ÖÎ¨Ò»Ï´ÅÆID
+// ä½¿ç”¨å®¢æˆ·æä¾›çš„ç§å­åŠåŒºå—é“¾è¿”å›éšæœºç§å­ï¼Œå…¨å±€å”¯ä¸€æ´—ç‰ŒID
 std::string GenFinallySeed(
 	std::string playerSeed1,
 	std::string playerSeed2,
@@ -52,23 +52,23 @@ std::string GenFinallySeed(
 	std::string etSeed2,
 	std::string shuffleID)
 {
-	printf("¿Í»§ÖÖ×Ó£º%s %s %s %s %s %s %s, %s\n",
+	printf("å®¢æˆ·ç§å­ï¼š%s %s %s %s %s %s %s, %s\n",
 		playerSeed1.c_str(), playerSeed2.c_str(), playerSeed3.c_str(), playerSeed4.c_str(),
 		playerSeed5.c_str(), playerSeed6.c_str(), playerSeed7.c_str(), playerSeed8.c_str());
 
-	printf("Çø¿éÁ´Éú³ÉÖÖ×Ó£º%s %s\n", etSeed1.c_str(), etSeed2.c_str());
+	printf("åŒºå—é“¾ç”Ÿæˆç§å­ï¼š%s %s\n", etSeed1.c_str(), etSeed2.c_str());
 
-	printf("Ï´ÅÆID£º%s\n", shuffleID.c_str());
+	printf("æ´—ç‰ŒIDï¼š%s\n", shuffleID.c_str());
 
 	std::string finallySeed = playerSeed1 + playerSeed2 + playerSeed3 + playerSeed4
 		+ playerSeed5 + playerSeed6 + playerSeed7 + playerSeed8
 		+ etSeed1 + etSeed2 + shuffleID;
 
-	printf("×îÖÕÖÖ×Ó£º%s\n\n", finallySeed.c_str());
+	printf("æœ€ç»ˆç§å­ï¼š%s\n\n", finallySeed.c_str());
 	return finallySeed;
 }
 
-// Ê¹ÓÃ×îÖÕÏ´ÅÆÖÖ×Ó½øĞĞÏ´ÅÆ
+// ä½¿ç”¨æœ€ç»ˆæ´—ç‰Œç§å­è¿›è¡Œæ´—ç‰Œ
 std::vector<uint64_t> GenRandomListBySeed(std::string seed, int needNumCnt)
 {
 	std::vector<uint64_t> randNumList;
@@ -83,7 +83,7 @@ std::vector<uint64_t> GenRandomListBySeed(std::string seed, int needNumCnt)
 }
 
 /*
- *  cardCnt      ¸ÃÍæ·¨ÓĞ¶àÉÙÕÅÅÆ
+ *  cardCnt      è¯¥ç©æ³•æœ‰å¤šå°‘å¼ ç‰Œ
  */
 std::vector<int> Shuffle(const std::vector<uint64_t>& randomList, int cardCnt)
 {
@@ -100,12 +100,12 @@ std::vector<int> Shuffle(const std::vector<uint64_t>& randomList, int cardCnt)
 }
 
 /*
- *  cardMaxValue ¸ÃÍæ·¨×î´óÅÆÃæÖµ
+ *  cardMaxValue è¯¥ç©æ³•æœ€å¤§ç‰Œé¢å€¼
  */
 void PokerPrint(const std::vector<int>& cardList, int actPokerMaxValue)
 {
 	int cnt = 0;
-	printf("¿ÉÊÓ»¯ÅÆĞòÁĞ£º\n");
+	printf("å¯è§†åŒ–ç‰Œåºåˆ—ï¼š\n");
 	const int cardSize = (int)cardList.size();
 	for (int i = 0; i < cardSize; ++i)
 	{
@@ -122,26 +122,26 @@ void PokerPrint(const std::vector<int>& cardList, int actPokerMaxValue)
 }
 
 /*
- *  finallySeed  ×îÖÕÖÖ×Ó
- *  cardCnt      ¸ÃÍæ·¨ÓĞ¶àÉÙÕÅÅÆ
- *  cardMaxValue ¸ÃÍæ·¨×î´óÅÆÃæÖµ
+ *  finallySeed  æœ€ç»ˆç§å­
+ *  cardCnt      è¯¥ç©æ³•æœ‰å¤šå°‘å¼ ç‰Œ
+ *  cardMaxValue è¯¥ç©æ³•æœ€å¤§ç‰Œé¢å€¼
  */
 void PokerPrintShuffle(const std::string& finallySeed, int cardCnt, int cardMaxValue)
 {
 	if (cardCnt <= 0 || cardMaxValue <= 0)
 	{
-		printf("%s : %d : ²ÎÊı´íÎó\n", __FUNCTION__, __LINE__);
+		printf("%s : %d : å‚æ•°é”™è¯¯\n", __FUNCTION__, __LINE__);
 		return;
 	}
 
 	std::vector<uint64_t> randomList = GenRandomListBySeed(finallySeed, cardCnt);
-	printf("Ëæ»úĞòÁĞ£º\n");
+	printf("éšæœºåºåˆ—ï¼š\n");
 	for (uint64_t num : randomList)
 		printf("%d ", (int)(num % cardCnt));
 	printf("\n\n");
 
 	std::vector<int> cardList = Shuffle(randomList, cardCnt);
-	printf("Ï´ÅÆºóµÄĞòÁĞ£º\n");
+	printf("æ´—ç‰Œåçš„åºåˆ—ï¼š\n");
 	for (int card : cardList)
 		printf("%d ", card);
 	printf("\n\n");
@@ -149,49 +149,49 @@ void PokerPrintShuffle(const std::string& finallySeed, int cardCnt, int cardMaxV
 	PokerPrint(cardList, cardMaxValue);
 }
 
-// ÷»×ÓÃ»ÓĞÉæ¼°µ½ÅÆÃæÖµ×ª»»
+// éª°å­æ²¡æœ‰æ¶‰åŠåˆ°ç‰Œé¢å€¼è½¬æ¢
 void DiceShuff(const std::string& finallySeed, int diceCnt)
 {
 	if (diceCnt <= 0)
 	{
-		printf("%s : %d : ²ÎÊı´íÎó\n", __FUNCTION__, __LINE__);
+		printf("%s : %d : å‚æ•°é”™è¯¯\n", __FUNCTION__, __LINE__);
 		return;
 	}
 
 	std::vector<uint64_t> randomList = GenRandomListBySeed(finallySeed, diceCnt);
-	printf("Ëæ»úĞòÁĞ£º\n");
+	printf("éšæœºåºåˆ—ï¼š\n");
 	for (uint64_t num : randomList)
 		printf("%d ", (int)(num % diceCnt));
 	printf("\n\n");
 
 	std::vector<int> diceList = Shuffle(randomList, diceCnt);
-	printf("Ï´ÅÆºóµÄĞòÁĞ£º\n");
+	printf("æ´—ç‰Œåçš„åºåˆ—ï¼š\n");
 	for (int dice : diceList)
 		printf("%d ", dice);
 	printf("\n\n");
 
-	printf("×îÖÕ÷»×ÓµãÊıÁĞ±í£º\n");
+	printf("æœ€ç»ˆéª°å­ç‚¹æ•°åˆ—è¡¨ï¼š\n");
 	for (int dice : diceList)
 		printf("%d ", (dice % 6) + 1);
 	putchar('\n');
 }
 
 /*
-*ºìÌÒQ:32,·½Æ¬Q:31,ºìÌÒ2:30,·½Æ¬2:29,ºìÌÒ8:28,·½Æ¬8:27,ºìÌÒ4:26,·½Æ¬4:25,
-*ºÚÌÒ10:24,Ã·»¨10:23,ºÚÌÒ4:22£¬Ã·»¨4:21,ºÚÌÒ6:20,Ã·»¨6:19,ºÚÌÒJ:18,Ã·»¨J:17,
-*ºìÌÒ10:16,·½Æ¬10:15,ºìÌÒ6:14,·½Æ¬6:13,ºìÌÒ7:12,·½Æ¬7:11,ºÚÌÒ9:10,Ã·»¨9:9£¬
-*ºÚÌÒ8:8,Ã·»¨8:7,ºÚÌÒ7:6,Ã·»¨7:5,ºÚÌÒ5:4,Ã·»¨5:3,ºìÌÒ3:2,´óÍõ:1
+*çº¢æ¡ƒQ:32,æ–¹ç‰‡Q:31,çº¢æ¡ƒ2:30,æ–¹ç‰‡2:29,çº¢æ¡ƒ8:28,æ–¹ç‰‡8:27,çº¢æ¡ƒ4:26,æ–¹ç‰‡4:25,
+*é»‘æ¡ƒ10:24,æ¢…èŠ±10:23,é»‘æ¡ƒ4:22ï¼Œæ¢…èŠ±4:21,é»‘æ¡ƒ6:20,æ¢…èŠ±6:19,é»‘æ¡ƒJ:18,æ¢…èŠ±J:17,
+*çº¢æ¡ƒ10:16,æ–¹ç‰‡10:15,çº¢æ¡ƒ6:14,æ–¹ç‰‡6:13,çº¢æ¡ƒ7:12,æ–¹ç‰‡7:11,é»‘æ¡ƒ9:10,æ¢…èŠ±9:9ï¼Œ
+*é»‘æ¡ƒ8:8,æ¢…èŠ±8:7,é»‘æ¡ƒ7:6,æ¢…èŠ±7:5,é»‘æ¡ƒ5:4,æ¢…èŠ±5:3,çº¢æ¡ƒ3:2,å¤§ç‹:1
 */
 void DaXuanPrint(const std::string& finallySeed)
 {
 	std::vector<uint64_t> randomList = GenRandomListBySeed(finallySeed, 32);
-	printf("Ëæ»úĞòÁĞ£º\n");
+	printf("éšæœºåºåˆ—ï¼š\n");
 	for (uint64_t num : randomList)
 		printf("%d ", (int)(num % 32));
 	printf("\n\n");
 
 	std::vector<int> cardList = Shuffle(randomList, 32);
-	printf("Ï´ÅÆºóµÄĞòÁĞ£º\n");
+	printf("æ´—ç‰Œåçš„åºåˆ—ï¼š\n");
 	for (int card : cardList)
 		printf("%d ", card);
 	printf("\n\n");
@@ -199,13 +199,13 @@ void DaXuanPrint(const std::string& finallySeed)
 	static std::string cardNumStr[33] =
 	{
 			"",
-			"´óÍõ",  "ºìÌÒ3", "Ã·»¨5", "ºÚÌÒ5", "Ã·»¨7", "ºÚÌÒ7", "Ã·»¨8",  "ºÚÌÒ8",
-			"Ã·»¨9", "ºÚÌÒ9", "·½Æ¬7", "ºìÌÒ7", "·½Æ¬6", "ºìÌÒ6", "·½Æ¬10", "ºìÌÒ10",
-			"Ã·»¨J", "ºÚÌÒJ", "Ã·»¨6", "ºÚÌÒ6", "Ã·»¨4", "ºÚÌÒ4", "Ã·»¨10", "ºÚÌÒ10",
-			"·½Æ¬4", "ºìÌÒ4", "·½Æ¬8", "ºìÌÒ8", "·½Æ¬2", "ºìÌÒ2", "·½Æ¬Q",  "ºìÌÒQ"
+			"å¤§ç‹",  "çº¢æ¡ƒ3", "æ¢…èŠ±5", "é»‘æ¡ƒ5", "æ¢…èŠ±7", "é»‘æ¡ƒ7", "æ¢…èŠ±8",  "é»‘æ¡ƒ8",
+			"æ¢…èŠ±9", "é»‘æ¡ƒ9", "æ–¹ç‰‡7", "çº¢æ¡ƒ7", "æ–¹ç‰‡6", "çº¢æ¡ƒ6", "æ–¹ç‰‡10", "çº¢æ¡ƒ10",
+			"æ¢…èŠ±J", "é»‘æ¡ƒJ", "æ¢…èŠ±6", "é»‘æ¡ƒ6", "æ¢…èŠ±4", "é»‘æ¡ƒ4", "æ¢…èŠ±10", "é»‘æ¡ƒ10",
+			"æ–¹ç‰‡4", "çº¢æ¡ƒ4", "æ–¹ç‰‡8", "çº¢æ¡ƒ8", "æ–¹ç‰‡2", "çº¢æ¡ƒ2", "æ–¹ç‰‡Q",  "çº¢æ¡ƒQ"
 	};
 
-	printf("¿ÉÊÓ»¯ÅÆĞòÁĞ£º\n");
+	printf("å¯è§†åŒ–ç‰Œåºåˆ—ï¼š\n");
 	for (auto card : cardList)
 		printf("%s ", cardNumStr[card].c_str());
 	putchar('\n');
@@ -213,28 +213,28 @@ void DaXuanPrint(const std::string& finallySeed)
 
 int main()
 {
-	// 1£¬Éú³É×îÖÕÏ´ÅÆÖÖ×Ó
+	// 1ï¼Œç”Ÿæˆæœ€ç»ˆæ´—ç‰Œç§å­
 	const std::string finallySeed = GenFinallySeed("o0fGqmei", "mgFqmN5z", "", "",
 		"", "", "", "",
 		"", "", "6511474087809777665");
 
-	// 2£¬¸ù¾İ¸÷ÖÖ²»Í¬Íæ·¨ÈÏ¶¨²»Í¬²ÎÊı
-	// 2.1£¬BlackJackÍæ·¨£¬6¸±ÅÆ£¬×î´óÅÆÃæÖµ13
+	// 2ï¼Œæ ¹æ®å„ç§ä¸åŒç©æ³•è®¤å®šä¸åŒå‚æ•°
+	// 2.1ï¼ŒBlackJackç©æ³•ï¼Œ6å‰¯ç‰Œï¼Œæœ€å¤§ç‰Œé¢å€¼13
 	// PokerPrintShuffle(finallySeed, 312, 13);
 
-	// 2.2£¬÷»×ÓÍæ·¨£¬Ê¹ÓÃ3¸ö÷»×Ó
+	// 2.2ï¼Œéª°å­ç©æ³•ï¼Œä½¿ç”¨3ä¸ªéª°å­
 	// DiceShuff(finallySeed, 3);
 
-	// 2.2£¬°Ù¼ÒÀÖÍæ·¨£¬6¸±ÅÆ£¬×î´óÅÆÃæÖµ13
+	// 2.2ï¼Œç™¾å®¶ä¹ç©æ³•ï¼Œ6å‰¯ç‰Œï¼Œæœ€å¤§ç‰Œé¢å€¼13
 	// PokerPrintShuffle(finallySeed, 312, 13);
 
-	// 2.3£¬´ò’‰Íæ·¨£¬1¸±ÅÆ£¬×î´óÅÆÃæÖµ9»ò13
+	// 2.3ï¼Œæ‰“æ‹¤ç©æ³•ï¼Œ1å‰¯ç‰Œï¼Œæœ€å¤§ç‰Œé¢å€¼9æˆ–13
 	// PokerPrintShuffle(finallySeed, 52, 9);
 
-	// 2.4£¬Å£Å£Íæ·¨£¬1¸±ÅÆ£¬×î´óÅÆÃæÖµ13
+	// 2.4ï¼Œç‰›ç‰›ç©æ³•ï¼Œ1å‰¯ç‰Œï¼Œæœ€å¤§ç‰Œé¢å€¼13
 	// PokerPrintShuffle(finallySeed, 52, 13);
 
-	// 2.5£¬´òĞıÍæ·¨£¬¶ÔÓ¦±È½ÏÌØÊâ
+	// 2.5ï¼Œæ‰“æ—‹ç©æ³•ï¼Œå¯¹åº”æ¯”è¾ƒç‰¹æ®Š
 	DaXuanPrint(finallySeed);
 
 	getchar();
